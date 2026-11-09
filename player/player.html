@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden;color:#ece7f5;font:14px system-ui,sans-serif}
+canvas{position:fixed;inset:0;width:100vw;height:100vh;object-fit:contain;display:block}
+#boot{position:fixed;inset:0;z-index:3;display:grid;place-items:center;text-align:center;background:#0d0b14;line-height:1.7}
+#boot b{font-size:28px;letter-spacing:.08em;font-weight:600}
+#boot small{color:#9d95b3}
+#msg{color:#bdb5d0}
+#go{margin-top:16px;font:inherit;font-size:16px;padding:9px 28px;border-radius:999px;border:1px solid #6d6190;background:#231d36;color:#fff;cursor:pointer}
+#go:hover{background:#30274a}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;gap:12px;padding:14px 18px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7));transition:opacity .35s}
+#bar.hide{opacity:0}
+#bar button{background:none;border:0;color:#fff;font-size:18px;line-height:1;cursor:pointer;width:30px;padding:4px 0}
+#seek{flex:1;accent-color:#e8b46a;min-width:60px}
+#time{font-variant-numeric:tabular-nums;min-width:96px;text-align:right;color:#d2cbe2}
+body.idle{cursor:none}
+</style>
+</head>
+<body>
+<div id="boot"><div><b>HAYATE · 疾風</b><br><small>Fable 5.5 Anime Lab</small><br><span id="msg">loading the film…</span><br><button id="go" hidden>▶ play</button></div></div>
+<div id="bar" hidden><button id="pp" title="play / pause (space)">▶</button><input id="seek" type="range" min="0" max="1199" step="1" value="0" aria-label="seek"><span id="time">0.0 / 50.0 s</span><button id="fs" title="fullscreen (F)">⛶</button></div>
+<!-- single-file offline player: every ES module, the mascot files and the soundtrack are inlined below (built by tools/build-player.mjs) -->
+<script id="film-modules" type="application/json">/*__MODULES__*/</script>
+<script id="film-assets" type="application/json">/*__ASSETS__*/</script>
+<script>
+// bootstrap: every ES module -> a blob: URL in an import map; asset files are answered to fetch() from memory
+// (the inlined modules see import.meta.url under a fake base, so new URL('./clawd.glb', import.meta.url) lands here)
+(function () {
+  var mods = JSON.parse(document.getElementById('film-modules').textContent), imports = {};
+  for (var k in mods) imports[k] = URL.createObjectURL(new Blob([mods[k]], { type: 'text/javascript' }));
+  var im = document.createElement('script'); im.type = 'importmap'; im.textContent = JSON.stringify({ imports: imports }); document.head.appendChild(im);
+  var assets = JSON.parse(document.getElementById('film-assets').textContent), BASE = '__BASE__', blobs = {};
+  function blobOf(k) {
+    if (!blobs[k]) { var a = assets[k], bin = atob(a.data), u = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); blobs[k] = new Blob([u], { type: a.type }); }
+    return blobs[k];
+  }
+  var nativeFetch = window.fetch.bind(window);
+  window.fetch = function (input, init) {
+    var url = typeof input === 'string' ? input : (input && input.url) || String(input);
+    if (url.indexOf(BASE) === 0) { var k = url.slice(BASE.length).split(/[?#]/)[0]; return Promise.resolve(assets[k] ? new Response(blobOf(k), { status: 200 }) : new Response(null, { status: 404 })); }
+    return nativeFetch(input, init);
+  };
+  window.__FILM_AUDIO = assets['soundtrack.m4a'] ? URL.createObjectURL(blobOf('soundtrack.m4a')) : null;
+})();
+</script>
+<script type="module">
+const FPS = 24, NF = 1392, $ = (id) => document.getElementById(id);
+const msg = $('msg'), go = $('go'), bar = $('bar'), pp = $('pp'), seek = $('seek'), time = $('time');
+const q = new URLSearchParams(location.search);
+try {
+  await import('@hayate/src/hayate.js');   // builds the film (sets, characters, shaders) and appends its WebGL canvas to <body>
+  await window.ready;
+} catch (e) { msg.textContent = 'could not start: ' + e; throw e; }
+const film = window.__dbg, glc = document.querySelector('canvas');
+let shown = glc, cur = -1;
+// the film is a pure function of the frame index: renderFilm(f) returns the canvas to show (the WebGL canvas, or a 2D canvas
+// during the dissolve into the end card)
+function draw(f) {
+  f = Math.max(0, Math.min(NF - 1, Math.floor(f)));
+  if (f === cur) return; cur = f;
+  const c = film.renderFilm(f);
+  if (c !== shown) { if (!c.isConnected) document.body.insertBefore(c, bar); c.style.visibility = 'visible'; shown.style.visibility = 'hidden'; shown = c; }
+  seek.value = f; time.textContent = `${(f / FPS).toFixed(1)} / ${(NF / FPS).toFixed(1)} s`;
+}
+msg.textContent = 'preparing shaders…'; await new Promise(r => setTimeout(r, 30));
+for (const f of [36, 96, 180, 330, 390, 480, 540, 610, 680, 730, 780, 840, 920, 990, 1020, 1090, 1150, 1240, 1320, 1330, 1380]) draw(f);   // one frame per shot + the dissolve + the card
+const start = q.has('f') ? +q.get('f') : q.has('t') ? Math.round(+q.get('t') * FPS) : 0;
+cur = -1; draw(start);
+const info = window.__info();
+msg.textContent = `1920×1080 · 24 fps · ${info.renderer.replace(/^ANGLE \(|\)$/g, '')}`;
+go.hidden = false;
+
+const audio = window.__FILM_AUDIO ? new Audio(window.__FILM_AUDIO) : null;
+if (audio) audio.preload = 'auto';
+let playing = false, t0 = 0, f0 = 0;
+const clock = () => (audio ? audio.currentTime : f0 / FPS + (performance.now() - t0) / 1000);
+function play() {
+  if (cur >= NF - 1) { cur = -1; draw(0); }
+  playing = true; pp.textContent = '❚❚';
+  if (audio) { audio.currentTime = cur / FPS; audio.play().catch(() => {}); } else { f0 = cur; t0 = performance.now(); }
+}
+function pause() { playing = false; pp.textContent = '▶'; if (audio) audio.pause(); showBar(); }
+const toggle = () => (playing ? pause() : play());
+function seekTo(f) {
+  f = Math.max(0, Math.min(NF - 1, Math.round(f))); draw(f);
+  if (audio) audio.currentTime = f / FPS; else { f0 = f; t0 = performance.now(); }
+}
+function loop() {
+  if (playing) {
+    const f = Math.floor(clock() * FPS + 1e-6);   // frames are dropped if the GPU is slower than 24 fps; the sound never waits
+    if (f >= NF || (audio && audio.ended)) { draw(NF - 1); pause(); } else draw(f);
+  }
+  requestAnimationFrame(loop);
+}
+let idle = 0;
+function showBar() { bar.classList.remove('hide'); document.body.classList.remove('idle'); clearTimeout(idle);
+  idle = setTimeout(() => { if (playing) { bar.classList.add('hide'); document.body.classList.add('idle'); } }, 2500); }
+go.onclick = () => { $('boot').remove(); bar.hidden = false; play(); showBar(); requestAnimationFrame(loop); };
+pp.onclick = toggle;
+seek.oninput = () => seekTo(+seek.value);
+$('fs').onclick = () => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen());
+document.addEventListener('mousemove', showBar);
+document.addEventListener('click', (e) => { if (e.target.tagName === 'CANVAS') toggle(); });
+document.addEventListener('keydown', (e) => {
+  if ($('boot')) return;
+  if (e.code === 'Space' || e.key === 'k') { e.preventDefault(); toggle(); }
+  else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const d = (e.key === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? FPS : 1); seekTo((playing ? clock() * FPS : cur) + d); }
+  else if (e.key === 'f' || e.key === 'F') $('fs').onclick();
+  else if (e.key === 'Home') seekTo(0);
+  showBar();
+});
+window.__player = { draw, seekTo, play, pause, state: () => ({ playing, frame: cur, audio: !!audio, t: clock() }) };
+</script>
+</body>
+</html>

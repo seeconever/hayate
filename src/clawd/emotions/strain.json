@@ -1,0 +1,49 @@
+{
+ "name": "strain",
+ "parts": {
+  "eyeChevron_L": {
+   "x": -0.16,
+   "y": 0.06,
+   "morph": {
+    "squeeze": 1
+   },
+   "rot": 0
+  },
+  "eyeChevron_R": {
+   "x": 0.16,
+   "y": 0.06,
+   "morph": {
+    "squeeze": 1
+   },
+   "rot": 0
+  },
+  "brow_L": {
+   "x": -0.17,
+   "y": 0.155,
+   "rot": -12
+  },
+  "brow_R": {
+   "x": 0.17,
+   "y": 0.155,
+   "rot": 12
+  },
+  "mouth_teeth": {
+   "x": 0,
+   "y": -0.09,
+   "s": [
+    1.05,
+    1.15
+   ]
+  },
+  "sweat": {
+   "x": 0.3,
+   "y": 0.145
+  }
+ },
+ "pose": {
+  "armL": -8,
+  "armR": -8,
+  "squash": 0.14,
+  "lean": 4
+ }
+}

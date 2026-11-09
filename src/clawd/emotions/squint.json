@@ -1,0 +1,44 @@
+{
+ "name": "squint",
+ "parts": {
+  "eyeChevron_L": {
+   "x": -0.165,
+   "y": 0.065,
+   "rot": 0,
+   "morph": {
+    "squeeze": 0.7
+   }
+  },
+  "eyeChevron_R": {
+   "x": 0.165,
+   "y": 0.065,
+   "rot": 0,
+   "morph": {
+    "squeeze": 0.7
+   }
+  },
+  "mouth_line": {
+   "x": 0,
+   "y": -0.085,
+   "s": 0.8,
+   "morph": {
+    "smile": 0.55,
+    "wavy": 0.35
+   }
+  },
+  "blush_L": {
+   "x": -0.3,
+   "y": -0.05
+  },
+  "blush_R": {
+   "x": 0.3,
+   "y": -0.05
+  }
+ },
+ "pose": {
+  "armL": 12,
+  "armR": 12,
+  "squash": 0.12,
+  "lean": -3
+ }
+}

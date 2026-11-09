@@ -1,0 +1,25 @@
+{
+  "name": "hayate",
+  "version": "1.0.0",
+  "description": "HAYATE: a 58-second anime short rendered entirely by code (three.js), Fable 5.5 Anime Lab.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "serve": "node tools/serve.mjs",
+    "snap": "node tools/render.mjs stills --fmt png",
+    "keys": "node tools/keys.mjs --sheet 1",
+    "render": "node tools/render.mjs film --fmt png --out final/frames",
+    "audio": "node tools/sound.mjs && node tools/master.mjs --ceiling -2.2",
+    "player": "node tools/build-player.mjs",
+    "encode": "node tools/draft_qc.mjs --frames final/frames --ext png --outdir final --name video_noaudio.mp4 --qa final_ --crf 19 --maxrate 26M --bufsize 52M --preset slow && node tools/master.mjs --ceiling -2.2 --out final/hayate.mp4",
+    "collide": "node tools/probe.mjs --js tools/collide.js",
+    "build": "npm run audio && npm run render && npm run player && npm run encode"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

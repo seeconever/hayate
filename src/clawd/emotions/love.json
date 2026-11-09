@@ -1,0 +1,35 @@
+{
+ "name": "love",
+ "parts": {
+  "eyeHeart_L": {
+   "x": -0.17,
+   "y": 0.065,
+   "rot": 0
+  },
+  "eyeHeart_R": {
+   "x": 0.17,
+   "y": 0.065,
+   "rot": 0
+  },
+  "mouth_line": {
+   "x": 0,
+   "y": -0.08,
+   "morph": {
+    "smile": 1
+   }
+  },
+  "blush_L": {
+   "x": -0.3,
+   "y": -0.05
+  },
+  "blush_R": {
+   "x": 0.3,
+   "y": -0.05
+  }
+ },
+ "pose": {
+  "armL": 40,
+  "armR": 40,
+  "tilt": 6
+ }
+}

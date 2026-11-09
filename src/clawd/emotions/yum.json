@@ -1,0 +1,12 @@
+{
+ "name": "yum",
+ "parts": {
+  "eyeArcUp_L": { "x": -0.17, "y": 0.074, "rot": 0 },
+  "eyeArcUp_R": { "x": 0.17, "y": 0.074, "rot": 0 },
+  "mouth_fill": { "x": 0, "y": -0.095, "s": [0.95, 0.92], "morph": { "smileOpen": 1 } },
+  "blush_L": { "x": -0.3, "y": -0.05 },
+  "blush_R": { "x": 0.3, "y": -0.05 }
+ },
+ "sub": { "mouth_fill_tongue": true },
+ "pose": { "armL": 30, "armR": 30, "squash": -0.04, "lean": 3 }
+}

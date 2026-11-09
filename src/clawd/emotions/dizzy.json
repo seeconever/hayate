@@ -1,0 +1,29 @@
+{
+ "name": "dizzy",
+ "parts": {
+  "eyeSpiral_L": {
+   "x": -0.17,
+   "y": 0.06,
+   "rot": 0
+  },
+  "eyeSpiral_R": {
+   "x": 0.17,
+   "y": 0.06,
+   "rot": 0
+  },
+  "mouth_line": {
+   "x": 0,
+   "y": -0.09,
+   "s": 1.1,
+   "morph": {
+    "flat": 1,
+    "wavy": 1
+   }
+  }
+ },
+ "pose": {
+  "armL": 20,
+  "armR": -10,
+  "tilt": 10
+ }
+}

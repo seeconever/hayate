@@ -1,0 +1,30 @@
+{
+ "version": 1,
+ "emotions": [
+  "neutral",
+  "happy",
+  "surprised",
+  "sad",
+  "determined",
+  "wink",
+  "panic",
+  "strain",
+  "angry",
+  "relief",
+  "smug",
+  "eye_twitch",
+  "starry",
+  "dizzy",
+  "curious",
+  "sleepy",
+  "teary",
+  "love",
+  "shocked",
+  "cheeky",
+  "nervous",
+  "squint",
+  "gentle",
+  "yum",
+  "sip"
+ ]
+}

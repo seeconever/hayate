@@ -1,0 +1,38 @@
+{
+ "name": "shocked",
+ "parts": {
+  "eyeWhite_L": {
+   "x": -0.17,
+   "y": 0.065,
+   "rot": 0
+  },
+  "eyeWhite_R": {
+   "x": 0.17,
+   "y": 0.065,
+   "rot": 0
+  },
+  "brow_L": {
+   "x": -0.17,
+   "y": 0.215,
+   "rot": 6
+  },
+  "brow_R": {
+   "x": 0.17,
+   "y": 0.215,
+   "rot": -6
+  },
+  "mouth_fill": {
+   "x": 0,
+   "y": -0.105,
+   "morph": {
+    "tall": 1
+   }
+  }
+ },
+ "pose": {
+  "armL": 85,
+  "armR": 85,
+  "squash": -0.15,
+  "lean": -5
+ }
+}

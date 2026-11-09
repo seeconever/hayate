@@ -1,0 +1,12 @@
+node_modules/
+WORK/
+renders/
+frames/
+*.mp4
+*.wav
+*.log
+POST.md
+X-PROMPT.txt
+STATUS.md
+.DS_Store
+Thumbs.db

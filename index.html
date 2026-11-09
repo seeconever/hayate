@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HAYATE</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden}
+  canvas{display:block;margin:0 auto;max-width:100vw;max-height:100vh}
+</style>
+<!-- three.js r160 from vendor/three: no CDN, works offline -->
+<script type="importmap">
+{"imports":{
+  "three":"./vendor/three/build/three.module.js",
+  "three/addons/":"./vendor/three/examples/jsm/"
+}}
+</script>
+</head>
+<body>
+<!-- HAYATE: ?f=NNN / ?t=s for one frame, ?render=1 headless (tools/render.mjs) -->
+<script type="module" src="./src/hayate.js"></script>
+</body>
+</html>
