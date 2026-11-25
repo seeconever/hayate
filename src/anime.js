@@ -1,5 +1,5 @@
 // =====================================================================================================
-// ANIME LOOK KIT — "Fable 5.5 Anime Lab" (three 0.160, 'three' + 'three/addons/' from the importmap)
+// ANIME LOOK KIT — "Opus 5.6 Anime Lab" (three 0.160, 'three' + 'three/addons/' from the importmap)
 // Painterly Ghibli / Shinkai look: cel-shaded Clawd with ink lines, gouache backgrounds (Kuwahara paint pass
 // masked by alpha), practical glows (core + halo + glow sprite + cel spill), god-ray shafts + screen-space rays,
 // bloom + halation + grain + paper + vignette + chromatic softness, 24 fps "on twos", brush end card.
@@ -953,25 +953,21 @@ AnimePost.DEFAULTS = { expo: 1, sat: 1.05, knee: 0.72, gamma: 1, vignette: 0.28,
   paint: { k: 1, radius: 4, q: 8, hard: 1, aniso: 1, stroke: 0.07, strokeLen: 1.6, wobble: 2.0, vary: 0.10, hue: 0.12, paper: 0.05 }, bloom: { strength: 0.55, radius: 0.55, threshold: 0.9 }, rays: { on: false } };
 
 // =====================================================================================================
-// 11. END CARD — "Fable 5.5" brush lettering drawn stroke by stroke (procedural brush, no fonts) + red hanko 寓話
+// 11. END CARD — "Opus 5.6" brush lettering drawn stroke by stroke (procedural brush, no fonts) + red hanko 作品
 //     + optional film title EN / JP. createEndCard() -> { scene, camera, draw(t), duration }.
 // =====================================================================================================
 // glyph strokes in a 1000 x 300 box (y down, baseline 250, x-height 140), italic shear applied at draw time; w = width scale
-const FABLE_STROKES = [
-  { p: [[118, 60], [113, 110], [104, 175], [94, 252]], w: 1.0 },                                   // F stem
-  { p: [[66, 66], [110, 58], [160, 52], [214, 40]], w: 0.85 },                                     // F top bar
-  { p: [[92, 150], [124, 147], [166, 141]], w: 0.75 },                                             // F middle bar
-  { p: [[302, 166], [284, 145], [250, 146], [224, 178], [221, 222], [240, 250], [270, 240], [296, 200]], w: 0.85 },  // a bowl
-  { p: [[306, 146], [300, 196], [301, 236], [322, 252]], w: 0.9 },                                 // a stem
-  { p: [[376, 40], [368, 120], [360, 196], [355, 250]], w: 1.0 },                                  // b stem
-  { p: [[361, 196], [388, 156], [424, 158], [432, 202], [413, 240], [377, 252], [357, 242]], w: 0.85 },  // b bowl
-  { p: [[484, 38], [476, 128], [469, 206], [478, 244], [500, 250]], w: 0.95 },                     // l
-  { p: [[528, 204], [566, 198], [592, 178], [582, 151], [550, 148], [522, 176], [516, 220], [534, 248], [570, 252], [602, 232]], w: 0.85 },  // e
-  { p: [[726, 60], [760, 57], [806, 52]], w: 0.8 },                                                // 5 top bar
-  { p: [[727, 62], [721, 102], [714, 142], [742, 131], [781, 137], [806, 170], [800, 220], [768, 250], [727, 251], [700, 233]], w: 1.0 },  // 5 body
-  { p: [[842, 238], [849, 246]], w: 1.5, dot: true },                                              // .
-  { p: [[896, 60], [930, 57], [976, 52]], w: 0.8 },                                                // 5 top bar
-  { p: [[897, 62], [891, 102], [884, 142], [912, 131], [951, 137], [976, 170], [970, 220], [938, 250], [897, 251], [870, 233]], w: 1.0 },  // 5 body
+const OPUS_STROKES = [
+  { p: [[160, 50], [112, 50], [78, 92], [70, 160], [88, 226], [132, 252], [178, 232], [204, 170], [198, 100], [170, 58], [136, 50]], w: 1.0 },  // O
+  { p: [[268, 116], [262, 190], [254, 260], [246, 318]], w: 1.0 },                                 // p stem
+  { p: [[264, 156], [290, 120], [328, 120], [344, 162], [332, 216], [298, 246], [262, 236]], w: 0.85 },  // p bowl
+  { p: [[392, 118], [384, 188], [390, 236], [416, 250], [444, 230], [460, 182]], w: 0.9 },         // u bowl
+  { p: [[466, 116], [460, 190], [462, 234], [482, 252]], w: 0.9 },                                 // u stem
+  { p: [[584, 130], [560, 114], [530, 120], [522, 150], [548, 176], [578, 204], [572, 240], [538, 254], [506, 236]], w: 0.85 },  // s
+  { p: [[700, 60], [734, 57], [780, 52]], w: 0.8 },                                                // 5 top bar
+  { p: [[701, 62], [695, 102], [688, 142], [716, 131], [755, 137], [780, 170], [774, 220], [742, 250], [701, 251], [674, 233]], w: 1.0 },  // 5 body
+  { p: [[816, 238], [823, 246]], w: 1.5, dot: true },                                              // .
+  { p: [[956, 56], [920, 62], [890, 96], [872, 154], [870, 210], [890, 246], [926, 254], [958, 228], [964, 188], [942, 160], [906, 162], [880, 196]], w: 1.0 },  // 6
 ];
 function catmull(pts, step = 1.2) {
   const out = []; const P = [pts[0], ...pts, pts[pts.length - 1]];
@@ -979,7 +975,7 @@ function catmull(pts, step = 1.2) {
     for (let k = 0; k < n; k++) { const t = k / n, t2 = t * t, t3 = t2 * t; out.push([0, 1].map(j => 0.5 * ((2 * p1[j]) + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3))); } }
   out.push(pts[pts.length - 1].slice()); return out;
 }
-export function brushLettering({ strokes = FABLE_STROKES, x0 = 0, y0 = 0, scale = 1, shear = 0.16, width = 26, nibA = -0.62, ink = [26, 18, 14], dur = 2.6, gap = 0.07, seed = 5 } = {}) {
+export function brushLettering({ strokes = OPUS_STROKES, x0 = 0, y0 = 0, scale = 1, shear = 0.16, width = 26, nibA = -0.62, ink = [26, 18, 14], dur = 2.6, gap = 0.07, seed = 5 } = {}) {
   const R = rng(seed), S = strokes.map(s => { const pts = catmull(s.p.map(([x, y]) => [x0 + (x + (250 - y) * shear) * scale, y0 + y * scale]), 1.0);
     let L = 0; for (let i = 1; i < pts.length; i++) L += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); return { ...s, pts, L, seedB: Array.from({ length: 22 }, () => R()) }; });
   const tot = S.reduce((a, s) => a + Math.pow(s.L + 40, 0.75), 0), avail = dur - gap * (S.length - 1); let t = 0;
@@ -1005,8 +1001,8 @@ export function brushLettering({ strokes = FABLE_STROKES, x0 = 0, y0 = 0, scale 
   return { strokes: S, duration: t - gap,
     draw(c, time) { for (const s of S) { if (time <= s.t0) break; drawStroke(c, s, (time - s.t0) / s.d); } } };
 }
-// red hanko seal with 寓話 knocked out (system mincho font via canvas), rough stamped edges
-export function drawHanko(c, { x, y, size = 96, text = '寓話', color = '#c1272d', alpha = 1, rot = -0.04, seed = 9, font = '"Yu Mincho", "MS Mincho", "Noto Serif JP", serif' } = {}) {
+// red hanko seal with 作品 knocked out (system mincho font via canvas), rough stamped edges
+export function drawHanko(c, { x, y, size = 96, text = '作品', color = '#c1272d', alpha = 1, rot = -0.04, seed = 9, font = '"Yu Mincho", "MS Mincho", "Noto Serif JP", serif' } = {}) {
   const R = rng(seed), s = size, off = document.createElement('canvas'); off.width = off.height = Math.ceil(s * 1.3); const o = off.getContext('2d'), m = s * 0.15;
   o.fillStyle = color; o.beginPath(); const N = 40; for (let i = 0; i <= N * 4; i++) { const k = i / N, side = Math.floor(k) % 4, f = k - Math.floor(k), j = (R() - 0.5) * s * 0.025;
     const pts = [[m + f * s, m + j], [m + s + j, m + f * s], [m + s - f * s, m + s + j], [m + j, m + s - f * s]][side]; if (i === 0) o.moveTo(...pts); else o.lineTo(...pts); } o.closePath(); o.fill();

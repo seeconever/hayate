@@ -1,4 +1,4 @@
-// src/hayate.js: HAYATE 疾風 (Fable 5.5 Anime Lab). 58 s, 24 fps, 1920x1080, 1392 frames, wordless. Pure function of the frame index.
+// src/hayate.js: HAYATE 疾風 (Opus 5.6 Anime Lab). 58 s, 24 fps, 1920x1080, 1392 frames, wordless. Pure function of the frame index.
 // Same structure as src/ame.js: timeline table, sets, hero props, stage functions (pose + camera per shot), renderFilm(f).
 // Clawd + his acting on twos, camera on ones, FX on threes. ?f=NNN / ?t=s = one frame in a browser, ?render=1 = tools/render.mjs.
 // World: the bike rides toward +Z. Clawd body width = 1. Sets are cells wrapped around the camera (cells()).

@@ -1,7 +1,7 @@
 # HAYATE · 疾風 — production brief
 
 A 58-second, 24 fps, 1920×1080 anime short (23 shots, 1392 frames), wordless, rendered in the browser with three.js, every sound
-synthesized. No video or image models, no samples. Series: "Fable 5.5 Anime Lab".
+synthesized. No video or image models, no samples. Series: "Opus 5.6 Anime Lab".
 
 ## Look
 It must look like hand-drawn 2D theatrical anime action, not 3D. A neon night city after rain: pink, cyan and amber signs in
@@ -47,7 +47,7 @@ twos, FX on threes where drawn, camera on ones. Never floaty.
 | s20 | 43.6–46.4 | the noren parts, the frog peeks out, eyes huge, hops up onto the box and sniffs; he flips the lid, steam blooms on both faces, the bowl rises on its tray, the ramen is perfect |
 | s21 | 46.4–49.0 | the tongue snaps out, pulls one long noodle in a whipping slurp, cheeks balloon, it melts with joy; Clawd lifts his visor, proud; the frog flicks a coin that lands on his helmet with a ting |
 | s22 | 49.0–55.0 | one last tiny drone sinks down through the rain, its eye goes red, it presses a parking ticket on his helmet; he deflates, a long held beat; the frog's tongue snatches the ticket and swallows it, a small burp; the drone's eye goes wide and it flees; they look at each other and laugh |
-| s23 | 55.0–58.0 | end card: "Fable 5.5" brush lettering, red 寓話 seal, title HAYATE 疾風 |
+| s23 | 55.0–58.0 | end card: "Opus 5.6" brush lettering, red 作品 seal, title HAYATE 疾風 |
 
 CUES: seal-box 3.6, kick 6.4, scan 8.1, launch 9.8, swarm 14.2, slide 16.3, wall 21.2, ramp 24.6, takeoff 25.5, land 28.0, nets 30.0,
 tunnel 32.0, arcade 34.0, stairs 37.0, shutter 40.8, slam 41.3, quiet 42.0, stop 42.95, peek 44.0, hop 44.62, perch 45.02, open 45.55, tongue 46.62,

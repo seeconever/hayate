@@ -1,13 +1,13 @@
 # HAYATE · 疾風
 
-A 58-second anime short rendered entirely by code: no video model, no image model, no hand-drawn frames. Made with Fable 5.5.
+A 58-second anime short rendered entirely by code: no video model, no image model, no hand-drawn frames. Made with Opus 5.6.
 
 ![HAYATE · 疾風: twelve frames from the film](docs/keyframes.jpg)
 
 **Watch:** download [`dist/hayate.html`](dist/hayate.html) and open it in Chrome, Edge or any browser with WebGL2 and a GPU. One
 self-contained file (5.5 MB): the player renders the film live at 1920×1080 with the soundtrack inlined, and works offline.
 
-> An original short, series **Fable 5.5 Anime Lab**. The production brief is [BRIEF.md](BRIEF.md).
+> An original short, series **Opus 5.6 Anime Lab**. The production brief is [BRIEF.md](BRIEF.md).
 
 | | |
 |---|---|
@@ -66,7 +66,7 @@ minutes for the whole film), about 2,300 dense lines of code (the film 148 KB, t
 
 ## How it was made
 
-Fable 5.5 in Claude Code, one agent, from a production brief ([BRIEF.md](BRIEF.md)). The agent built the city, the bike, the drones and
+Opus 5.6 in Claude Code, one agent, from a production brief ([BRIEF.md](BRIEF.md)). The agent built the city, the bike, the drones and
 the frog's face rig in code on top of the anime kit from Ame, painted the nook in canvas, wrote the score as a synth, and wrote the
 tools in `tools/`. A viewer watched the draft and asked for one thing: make the scene at the end with the frog more alive and
 original, in the look and the sound, and let nothing clip. The ending was rebuilt from scratch and the riding shots got new cameras.
@@ -147,4 +147,4 @@ vendor/three/        three.js r160 (only the files the film imports, MIT)
 ## License
 
 MIT © 2026 seeconever, see [LICENSE](LICENSE). three.js is MIT (`vendor/three/LICENSE`).
-Series: Fable 5.5 Anime Lab.
+Series: Opus 5.6 Anime Lab.

@@ -1,7 +1,7 @@
 {
   "name": "hayate",
   "version": "1.0.0",
-  "description": "HAYATE: a 58-second anime short rendered entirely by code (three.js), Fable 5.5 Anime Lab.",
+  "description": "HAYATE: a 58-second anime short rendered entirely by code (three.js), Opus 5.6 Anime Lab.",
   "private": true,
   "type": "module",
   "license": "MIT",
