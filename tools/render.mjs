@@ -2,6 +2,7 @@
 // (frame index = round(t * 24)), window.__info, window.ready. Everything goes to WORK (see tools/lib.mjs).
 //   node tools/render.mjs stills --times 0,18.1,36.6 [--out stills] [--prefix key_] [--fmt png]
 //   node tools/render.mjs film [--from 0] [--to 1392] [--chunk 150] [--out draft/frames] [--fmt jpg|png]
+//   node tools/render.mjs film --from 1320 --to 1392 --fmt png   re-renders only the end card (s23, 55-58 s)
 // Film mode: 150-frame chunks with .ok markers (resumable); prints "done" only if every chunk + file is present.
 import fs from 'node:fs';
 import path from 'node:path';

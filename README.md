@@ -14,6 +14,8 @@ self-contained file (5.5 MB): the player renders the film live at 1920×1080 wit
 | ![the jump](docs/stills/jump.jpg) | ![the frog](docs/stills/frog.jpg) |
 | ![the ramen](docs/stills/ramen.jpg) | ![the laugh](docs/stills/laugh.jpg) |
 
+![the end card: Opus 5.6, brush lettering drawn stroke by stroke, red 作品 seal](docs/stills/endcard.jpg)
+
 ---
 
 ## The story
@@ -140,7 +142,7 @@ src/clawd/           the mascot: loader, glTF model, emotion library
 tools/               render, sound, master, draft_qc, build-player, keys, probe + collide, spectrum, sheet, serve
 player/player.html   the single-file player template
 dist/hayate.html     the built single-file player
-docs/                keyframes.jpg, stills/
+docs/                keyframes.jpg, stills/ (incl. the end card)
 vendor/three/        three.js r160 (only the files the film imports, MIT)
 ```
 
